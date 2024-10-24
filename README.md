@@ -6,14 +6,14 @@ This is an advanced Python calculator with a command-line interface (REPL), dyna
 ## Setup Instructions
 1. Clone the repository and navigate into the project directory:
     ```bash
-    git clone <your-repo-url>
+    git clone <repo-url>
     cd advanced-python-calculator
     ```
 
 2. Create and activate a virtual environment:
     ```bash
     python -m venv venv
-    source venv/bin/activate
+    venv/bin/activate
     ```
 
 3. Install the dependencies:
