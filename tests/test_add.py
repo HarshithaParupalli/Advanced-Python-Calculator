@@ -1,5 +1,5 @@
 import pytest
-from plugins.add import Plugin
+from ..plugins.add import Plugin
 
 def test_add():
     plugin = Plugin()
