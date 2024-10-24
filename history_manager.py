@@ -1,39 +1,40 @@
 import pandas as pd
+import os
 
 class HistoryManager:
-    def __init__(self):
-        # Initialize an empty DataFrame with the correct columns
-        self.history = pd.DataFrame(columns=["Expression", "Result"])
+    def __init__(self, history_file='history.csv'):
+        self.history_file = history_file
+        self.history = self.load_history()
 
-    def log_calculation(self, expression, result):
-        # Create a DataFrame entry for the new calculation
-        new_entry = pd.DataFrame({"Expression": [expression], "Result": [result]})
-        
-        # Concatenate only if the history is not empty
-        if not self.history.empty:
-            self.history = pd.concat([self.history, new_entry], ignore_index=True)
-        else:
-            # If history is empty, set it directly to the new entry
-            self.history = new_entry
+    def load_history(self):
+        """Load history from a CSV file into a DataFrame."""
+        if os.path.exists(self.history_file):
+            return pd.read_csv(self.history_file)
+        return pd.DataFrame(columns=['Expression', 'Result'])
 
-    def show_history(self):
-        if self.history.empty:
-            print("No history available.")
-        else:
-            print(self.history)
+    def save_history(self):
+        """Save the current history DataFrame to a CSV file."""
+        self.history.to_csv(self.history_file, index=False)
+
+    def add_entry(self, expression, result):
+        """Add a new entry to the history."""
+        new_entry = pd.DataFrame({'Expression': [expression], 'Result': [result]})
+        self.history = pd.concat([self.history, new_entry], ignore_index=True)
+        self.save_history()
 
     def clear_history(self):
-        # Clear the history by resetting the DataFrame
-        self.history = pd.DataFrame(columns=["Expression", "Result"])
+        """Clear all history records."""
+        self.history = pd.DataFrame(columns=['Expression', 'Result'])
+        self.save_history()
 
-    def save_history(self, file_path):
-        # Save the history to a CSV file
-        self.history.to_csv(file_path, index=False)
+    def delete_entry(self, index):
+        """Delete an entry from the history by index."""
+        if 0 <= index < len(self.history):
+            self.history = self.history.drop(index).reset_index(drop=True)
+            self.save_history()
+        else:
+            print("Index out of range.")
 
-    def load_history(self, file_path):
-        # Load history from a CSV file, if it exists
-        try:
-            self.history = pd.read_csv(file_path)
-        except FileNotFoundError:
-            print(f"File {file_path} not found. Starting with empty history.")
-            self.history = pd.DataFrame(columns=["Expression", "Result"])
+    def view_history(self):
+        """Display the calculation history."""
+        return self.history

@@ -14,9 +14,17 @@ class PluginManager:
                 self.plugins[module_name] = module.Plugin()
 
     def show_plugins(self):
-        print("Available commands:", ", ".join(self.plugins.keys()))
+        available_commands = list(self.plugins.keys()) + ["clear", "delete <index>"]
+        print("Available commands:", ", ".join(available_commands))
 
     def execute_command(self, command):
+        # Check if the command is for history management
+        if command.startswith("clear"):
+            return self.execute_clear()
+        elif command.startswith("delete"):
+            return self.execute_delete(command)
+        
+        # Otherwise, treat it as a plugin command
         plugin_name, *args = command.split()
         if plugin_name in self.plugins:
             result = self.plugins[plugin_name].execute(*args)
@@ -24,3 +32,11 @@ class PluginManager:
             return result, full_expression
         else:
             raise ValueError(f"No such plugin: {plugin_name}")
+
+    def execute_clear(self):
+        return "clear", "History cleared."  # Placeholder response; actual clearing is handled in REPL
+
+    def execute_delete(self, command):
+        _, index = command.split()
+        return "delete", f"Entry {index} deleted."  # Placeholder response; actual deletion is handled in REPL
+
