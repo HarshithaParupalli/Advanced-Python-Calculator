@@ -22,10 +22,10 @@ jobs:
     - uses: actions/checkout@v3  # Checkout the repository's code so the job can access it
 
     # Set up Python 3.10
-    - name: Set up Python 3.10
+    - name: Set up Python 3.11
       uses: actions/setup-python@v3
       with:
-        python-version: "3.10"  # Specify the Python version to use
+        python-version: "3.11"  # Specify the Python version to use
 
     # Install Python dependencies and linting/testing tools
     - name: Install dependencies
