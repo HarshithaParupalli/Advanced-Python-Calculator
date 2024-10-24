@@ -35,6 +35,7 @@ class HistoryManager:
         else:
             print("Index out of range.")
 
+
     def view_history(self):
         """Display the calculation history."""
         return self.history

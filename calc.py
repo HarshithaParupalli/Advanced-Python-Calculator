@@ -4,7 +4,7 @@ from plugin_manager import PluginManager
 def repl():
     history_manager = HistoryManager()
     plugin_manager = PluginManager()
-    print("Type 'menu' for available commands, 'history' to view the history, 'clear' to clear history, or 'exit' to exit.")
+    print("Type 'menu' for available commands, 'history' to view the history, 'clear' to clear history, or 'exit' to exit. ")
     while True:
         try:
             command = input("calc> ").strip()

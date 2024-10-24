@@ -24,7 +24,6 @@ class PluginManager:
         elif command.startswith("delete"):
             return self.execute_delete(command)
         
-        # Otherwise, treat it as a plugin command
         plugin_name, *args = command.split()
         if plugin_name in self.plugins:
             result = self.plugins[plugin_name].execute(*args)
@@ -34,7 +33,7 @@ class PluginManager:
             raise ValueError(f"No such plugin: {plugin_name}")
 
     def execute_clear(self):
-        return "clear", "History cleared."  # Placeholder response; actual clearing is handled in REPL
+        return "clear", "History cleared." 
 
     def execute_delete(self, command):
         _, index = command.split()
