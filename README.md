@@ -2,6 +2,8 @@
 
 ## Overview
 This is an advanced Python calculator with a command-line interface (REPL), a dynamic plugin system, calculation history management using Pandas, and comprehensive logging and testing capabilities. The project is designed with extensibility and maintainability in mind, incorporating several design patterns to handle operations efficiently.
+For a quick overview and demonstration, watch [this video](https://youtu.be/sZV1_3MKibA).
+
 
 ## Setup Instructions
 1. **Clone the repository** and navigate into the project directory:
